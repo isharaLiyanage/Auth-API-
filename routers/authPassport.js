@@ -39,11 +39,12 @@ router.get("/logout", (req, res) => {
     if (err) {
       return next(err);
     }
+    req.session.destroy();
     res.redirect(process.env.CLIENT_URL);
   });
 });
 
 router.get("/protected", isLoggedIn, (req, res) => {
-  res.send("ds");
+  res.send(req.user);
 });
 module.exports = router;
